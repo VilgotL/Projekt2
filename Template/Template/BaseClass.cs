@@ -16,9 +16,14 @@ namespace Template
             posision = p;
             rectangle = r;
         }
-        public Rectangle rcetangle
+        public Rectangle Rectangle
         {
             get { return rectangle; }
+        }
+
+        public Vector2 Position
+        {
+            get { return posision; }
         }
 
         public virtual void Update()

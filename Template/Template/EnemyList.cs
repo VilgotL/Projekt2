@@ -8,7 +8,7 @@ namespace Template
 {
 	class EnemyList 
 	{
-		protected List<BaseClass> enemyList = new List<BaseClass>();
+		protected List<EnemyClass> enemyList = new List<EnemyClass>();
 		protected Texture2D e1Texture;
 
 		protected Stopwatch time = new Stopwatch();
@@ -19,12 +19,12 @@ namespace Template
 			e1Texture = e1;
 		}
 
-		public List<BaseClass> EList
+		public List<EnemyClass> EList
 		{
 			get { return enemyList; }
 		}
 
-		public void LoadContent() 
+		public void StartTime() 
 		{
 			time.Start();
 		}
@@ -33,7 +33,7 @@ namespace Template
 		{
 	        if (time.ElapsedMilliseconds >= 2000)
 			{
-				enemyList.Add(new Enemy1(e1Texture, new Vector2(300, 0), new Rectangle(300, -100, 50, 50)));
+				enemyList.Add(new Enemy1(e1Texture, new Vector2(300, -100), new Rectangle(300, -100, 50, 50)));
 				time.Stop();
 			    time.Reset();
 			    time.Start();

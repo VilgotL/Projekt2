@@ -14,6 +14,7 @@ namespace Template
 
         Player p;
         EnemyList eL;
+        Points points;
         //KOmentar
         public Game1()
         {
@@ -43,9 +44,13 @@ namespace Template
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
             p = new Player(Content.Load<Texture2D>("xwing"), Content.Load<Texture2D>("bullet4"), new Vector2(200, 650), new Rectangle(200, 650, 50, 50));          
+            
             eL = new EnemyList(Content.Load<Texture2D>("xwingRotated"));
-            eL.LoadContent();
+            eL.StartTime();
+
+            points = new Points(Content.Load<SpriteFont>("Text"), new Vector2(660, 50));
             // TODO: use this.Content to load your game content here 
         }
 
@@ -69,14 +74,34 @@ namespace Template
                 Exit();
             p.Update();
             eL.Update();
-            foreach (Bullet element in p.BList)
+
+            foreach (Bullet bullet in p.BList)
             {
-                element.Update();
+                bullet.Update();
+                foreach (EnemyClass enemy in eL.EList)
+                {
+                    if (bullet.Rectangle.Intersects(enemy.Rectangle))
+                    {
+                        enemy.Die();
+                        bullet.Remove();
+                        points.Add();
+                    }
+                }
             }
+
             foreach (BaseClass element in eL.EList)
             {
                 element.Update();
+                if (element.Rectangle.Intersects(p.Rectangle))
+                {
+                    Exit();
+                }
+                if (element.Position.Y > 800)
+                {
+                    Exit();
+                }
             }
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -93,6 +118,7 @@ namespace Template
             // TODO: Add your drawing code here.
             spriteBatch.Begin();
             p.Draw(spriteBatch);
+            points.Draw(spriteBatch);
             foreach (Bullet element in p.BList)
             {
                 element.Draw(spriteBatch);

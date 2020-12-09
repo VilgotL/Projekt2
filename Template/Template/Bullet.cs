@@ -14,6 +14,12 @@ namespace Template
             rectangle = r;
         }
 
+        public void Remove()
+        {
+            speed = 0f;
+            posision.X = 1000;
+        }
+
         public override void Update()
         {
             posision.Y -= speed;

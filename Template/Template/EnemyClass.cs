@@ -5,23 +5,31 @@ using System.Collections.Generic;
 
 namespace Template
 {
-	class Enemy1 : EnemyClass
+	class EnemyClass : BaseClass
 	{
-		public Enemy1(Texture2D t, Vector2 p, Rectangle r) : base(t, p, r)
+		protected float speed = 3f;
+		public EnemyClass(Texture2D t, Vector2 p, Rectangle r) : base(t, p, r)
 		{
 			texture = t;
 			posision = p;
 			rectangle = r;
 		}
 
+		public void Die()
+		{
+			speed = 0f;
+			posision.X = 2000;
+		}
+
 		public override void Update()
 		{
-			base.Update();
+			posision.Y += speed;
+			rectangle.Location = posision.ToPoint();
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			base.Draw(spriteBatch);
+			spriteBatch.Draw(texture, rectangle, Color.Red);
 		}
 	}
 }
