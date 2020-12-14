@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Template
 {
-	class Enemy1 : EnemyClass
-	{ 
-		public Enemy1(Texture2D t, Vector2 p, Rectangle r) : base(t, p, r)
+	class Enemy3 : EnemyClass
+	{
+		public Enemy3(Texture2D t, Vector2 p, Rectangle r) : base(t, p, r)
 		{
 			texture = t;
 			posision = p;
 			rectangle = r;
-			lives = (int)Defense.Low;
+			lives = (int)Defense.High;
 		}
 
 		public override void Update()
@@ -22,7 +22,7 @@ namespace Template
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(texture, rectangle, Color.Yellow);
+			spriteBatch.Draw(texture, rectangle, Color.Red);
 		}
 	}
 }

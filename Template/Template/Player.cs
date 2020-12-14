@@ -7,11 +7,15 @@ namespace Template
 {
     class Player : BaseClass
     {
-        protected float speed = 4f;
+        protected float speed = 7f;
+
         protected Texture2D bulletTexture;
+
+        protected List<Bullet> bulletList = new List<Bullet>();
+
         protected KeyboardState kNewState;
         protected KeyboardState kOldState;
-        protected List<Bullet> bulletList = new List<Bullet>();
+  
         public Player(Texture2D t, Texture2D bT, Vector2 p, Rectangle r) : base(t, p, r)
         {
             texture = t;
@@ -25,18 +29,34 @@ namespace Template
             get { return bulletList; }
         }
 
-        public override void Update()
+        private void Move()
         {
             kNewState = Keyboard.GetState();
-            KeyboardState kstate = Keyboard.GetState();
+
             if (kNewState.IsKeyDown(Keys.D))
                 posision.X += speed;
+
             if (kNewState.IsKeyDown(Keys.A))
                 posision.X -= speed;
+        }
+
+        private void Shoot()
+        {
+            kNewState = Keyboard.GetState();
+
             if (kNewState.IsKeyDown(Keys.Space) && kOldState.IsKeyUp(Keys.Space))
-                bulletList.Add(new Bullet(bulletTexture, new Vector2(posision.X, posision.Y), new Rectangle((int)posision.X, (int)posision.Y, 20, 20)));
+                bulletList.Add(new Bullet(bulletTexture, new Vector2(posision.X + 16, posision.Y), new Rectangle((int)posision.X, (int)posision.Y, 20, 20)));
+
             rectangle.Location = posision.ToPoint();
+
             kOldState = kNewState;
+        }
+
+
+        public override void Update()
+        {
+            Move();
+            Shoot();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

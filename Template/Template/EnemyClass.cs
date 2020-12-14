@@ -8,6 +8,16 @@ namespace Template
 	class EnemyClass : BaseClass
 	{
 		protected float speed = 3f;
+
+		protected enum Defense
+		{
+			Low,
+			Medium,
+			High
+		}
+
+		protected int lives;
+
 		public EnemyClass(Texture2D t, Vector2 p, Rectangle r) : base(t, p, r)
 		{
 			texture = t;
@@ -15,10 +25,22 @@ namespace Template
 			rectangle = r;
 		}
 
-		public void Die()
+		public void Damage()
+		{
+			lives--;
+
+			if (lives < 0)
+				Die();
+		}
+
+		private void Die()
 		{
 			speed = 0f;
 			posision.X = 2000;
+
+			Points.AddPoint();
+
+			EnemyList.DecreaseSpawnTime();
 		}
 
 		public override void Update()
@@ -29,7 +51,7 @@ namespace Template
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(texture, rectangle, Color.Red);
+			spriteBatch.Draw(texture, rectangle, Color.White);
 		}
 	}
 }

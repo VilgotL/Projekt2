@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
+using System.Linq.Expressions;
 
 namespace Template
 {
@@ -15,11 +17,14 @@ namespace Template
         Player p;
         EnemyList eL;
         Points points;
+
         //KOmentar
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+
             graphics.PreferredBackBufferHeight = 800;
+
             Content.RootDirectory = "Content";
         }
 
@@ -51,6 +56,8 @@ namespace Template
             eL.StartTime();
 
             points = new Points(Content.Load<SpriteFont>("Text"), new Vector2(660, 50));
+            points.ReadHighScore();
+
             // TODO: use this.Content to load your game content here 
         }
 
@@ -72,32 +79,38 @@ namespace Template
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            
             p.Update();
+            
             eL.Update();
 
             foreach (Bullet bullet in p.BList)
             {
                 bullet.Update();
+
                 foreach (EnemyClass enemy in eL.EList)
                 {
                     if (bullet.Rectangle.Intersects(enemy.Rectangle))
                     {
-                        enemy.Die();
+                        enemy.Damage();
                         bullet.Remove();
-                        points.Add();
                     }
                 }
             }
 
-            foreach (BaseClass element in eL.EList)
+            foreach (EnemyClass element in eL.EList)
             {
                 element.Update();
+
                 if (element.Rectangle.Intersects(p.Rectangle))
                 {
+                    points.WriteHighScore();
                     Exit();
                 }
+
                 if (element.Position.Y > 800)
                 {
+                    points.WriteHighScore();
                     Exit();
                 }
             }
@@ -116,18 +129,25 @@ namespace Template
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here.
+            
             spriteBatch.Begin();
+            
             p.Draw(spriteBatch);
+            
             points.Draw(spriteBatch);
+            
             foreach (Bullet element in p.BList)
             {
                 element.Draw(spriteBatch);
             }
-            foreach (BaseClass element in eL.EList)
+           
+            foreach (EnemyClass element in eL.EList)
             {
                 element.Draw(spriteBatch);
             }
+            
             spriteBatch.End();
+            
             base.Draw(gameTime);
         }
     }
