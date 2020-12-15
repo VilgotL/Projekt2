@@ -10,7 +10,8 @@ namespace Template
 	{
 		protected static int points = 0;
 
-		protected Vector2 position;
+		protected Vector2 position1;
+		protected Vector2 position2;
 
 		protected SpriteFont font;
 
@@ -19,9 +20,10 @@ namespace Template
 
 		protected int highScore;
 		
-		public Points(SpriteFont f, Vector2 p)
+		public Points(SpriteFont f, Vector2 p1, Vector2 p2)
 		{
-			position = p;
+			position1 = p1;
+			position2 = p2;
 			font = f;
 		}
 		
@@ -50,8 +52,8 @@ namespace Template
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.DrawString(font, "Points: " + points.ToString(), position, Color.Black);
-			spriteBatch.DrawString(font, "High Score: " + highScore.ToString(), new Vector2(660, 70), Color.Black);
+			spriteBatch.DrawString(font, "Points: " + points.ToString(), position1, Color.Black);
+			spriteBatch.DrawString(font, "High Score: " + highScore.ToString(), position2, Color.Black);
 		}
 	}
 }

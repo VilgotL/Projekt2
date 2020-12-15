@@ -16,6 +16,7 @@ namespace Template
             posision = p;
             rectangle = r;
         }
+
         public Rectangle Rectangle
         {
             get { return rectangle; }

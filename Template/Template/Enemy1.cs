@@ -12,6 +12,7 @@ namespace Template
 			texture = t;
 			posision = p;
 			rectangle = r;
+
 			lives = (int)Defense.Low;
 		}
 

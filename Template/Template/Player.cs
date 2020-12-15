@@ -45,9 +45,7 @@ namespace Template
             kNewState = Keyboard.GetState();
 
             if (kNewState.IsKeyDown(Keys.Space) && kOldState.IsKeyUp(Keys.Space))
-                bulletList.Add(new Bullet(bulletTexture, new Vector2(posision.X + 16, posision.Y), new Rectangle((int)posision.X, (int)posision.Y, 20, 20)));
-
-            rectangle.Location = posision.ToPoint();
+                bulletList.Add(new Bullet(bulletTexture, new Vector2(posision.X + 16, posision.Y), new Rectangle((int)posision.X + 16, (int)posision.Y, 20, 20)));
 
             kOldState = kNewState;
         }
@@ -57,6 +55,8 @@ namespace Template
         {
             Move();
             Shoot();
+
+            rectangle.Location = posision.ToPoint();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

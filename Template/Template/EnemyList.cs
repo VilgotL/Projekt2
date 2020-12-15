@@ -10,9 +10,11 @@ namespace Template
 	class EnemyList 
 	{
 		Random rnd = new Random();
+
 		protected static int spawnTime = 2000;
+
 		protected List<EnemyClass> enemyList = new List<EnemyClass>();
-		protected Texture2D eTexture;
+        protected Texture2D eTexture;
 
 		protected Stopwatch time = new Stopwatch();
 		
@@ -36,20 +38,33 @@ namespace Template
 			spawnTime -= 50;
 		}
 
+		private void ChooseEnemy()
+		{
+			int a = rnd.Next(1, 101);
+
+			if (a <= 50)
+				enemyList.Add(new Enemy1(eTexture, new Vector2(rnd.Next(0, 751), -100), new Rectangle(325, -100, 50, 50)));
+
+			if (a > 50 && a <= 80)
+				enemyList.Add(new Enemy2(eTexture, new Vector2(rnd.Next(0, 751), -100), new Rectangle(325, -100, 50, 50)));
+
+			if (a > 80)
+				enemyList.Add(new Enemy3(eTexture, new Vector2(rnd.Next(0, 751), -100), new Rectangle(325, -100, 50, 50)));
+		}
+
+		private void RestartTimer()
+		{
+			time.Stop();
+			time.Reset();
+			time.Start();
+		}
+
 		public void Update()
 		{
 	        if (time.ElapsedMilliseconds >= spawnTime)
 			{
-				int a = rnd.Next(1, 101);
-				if (a <= 50)
-					enemyList.Add(new Enemy1(eTexture, new Vector2(rnd.Next(0, 751), -100), new Rectangle(325, -100, 50, 50)));
-				if (a > 50 && a <= 80)
-					enemyList.Add(new Enemy2(eTexture, new Vector2(rnd.Next(0, 751), -100), new Rectangle(325, -100, 50, 50)));
-				if (a > 80)
-					enemyList.Add(new Enemy3(eTexture, new Vector2(rnd.Next(0, 751), -100), new Rectangle(325, -100, 50, 50)));
-				time.Stop();
-			    time.Reset();
-			    time.Start();
+				ChooseEnemy();
+                RestartTimer();
 			}
 			
 		} 

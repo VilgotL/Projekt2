@@ -55,7 +55,7 @@ namespace Template
             eL = new EnemyList(Content.Load<Texture2D>("xwingRotated"));
             eL.StartTime();
 
-            points = new Points(Content.Load<SpriteFont>("Text"), new Vector2(660, 50));
+            points = new Points(Content.Load<SpriteFont>("Text"), new Vector2(660, 50), new Vector2(660, 70));
             points.ReadHighScore();
 
             // TODO: use this.Content to load your game content here 
@@ -98,17 +98,17 @@ namespace Template
                 }
             }
 
-            foreach (EnemyClass element in eL.EList)
+            foreach (EnemyClass enemy in eL.EList)
             {
-                element.Update();
+                enemy.Update();
 
-                if (element.Rectangle.Intersects(p.Rectangle))
+                if (enemy.Rectangle.Intersects(p.Rectangle))
                 {
                     points.WriteHighScore();
                     Exit();
                 }
 
-                if (element.Position.Y > 800)
+                if (enemy.Position.Y > 800)
                 {
                     points.WriteHighScore();
                     Exit();
@@ -134,8 +134,6 @@ namespace Template
             
             p.Draw(spriteBatch);
             
-            points.Draw(spriteBatch);
-            
             foreach (Bullet element in p.BList)
             {
                 element.Draw(spriteBatch);
@@ -145,7 +143,9 @@ namespace Template
             {
                 element.Draw(spriteBatch);
             }
-            
+
+            points.Draw(spriteBatch);
+
             spriteBatch.End();
             
             base.Draw(gameTime);
