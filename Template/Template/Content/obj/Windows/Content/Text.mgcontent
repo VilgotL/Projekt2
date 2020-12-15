@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/vilgo/OneDrive/Skrivbord/Projekt2-master/Template/Template/Content/Text.spritefont</SourceFile>
-  <SourceTime>2018-12-08T17:35:46+01:00</SourceTime>
+  <SourceTime>2020-12-15T10:48:40.3111471+01:00</SourceTime>
   <DestFile>C:/Users/vilgo/OneDrive/Skrivbord/Projekt2-master/Template/Template/Content/bin/Windows/Content/Text.xnb</DestFile>
-  <DestTime>2020-12-09T09:08:19.0765905+01:00</DestTime>
+  <DestTime>2020-12-15T10:48:45.154592+01:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
